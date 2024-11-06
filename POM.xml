@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example</groupId>
+    <artifactId>rpm-example</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <build>
+        <plugins>
+            <!-- RPM Maven Plugin -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>rpm-maven-plugin</artifactId>
+                <version>2.1.4</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>rpm</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <rpmDirectory>${project.build.directory}/rpm</rpmDirectory>
+                    <name>${project.artifactId}</name>
+                    <version>${project.version}</version>
+                    <group>com.example</group>
+                    <packaging>jar</packaging>
+                    <prefix>/opt</prefix>
+                    <dependencies>
+                        <!-- List any dependencies you need to package -->
+                    </dependencies>
+                    <files>
+                        <!-- Specify files to include in the RPM -->
+                        <file>
+                            <source>${project.build.directory}/${project.artifactId}-${project.version}.jar</source>
+                            <destination>/${project.artifactId}/</destination>
+                        </file>
+                    </files>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
